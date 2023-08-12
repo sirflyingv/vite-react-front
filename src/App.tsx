@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import AuthProvider from './AuthProvider';
 import resources from './i18n/locales';
 
 import View from './View';
@@ -13,7 +14,9 @@ const App = async () => {
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <I18nextProvider i18n={i18n}>
-      <View />
+      <AuthProvider>
+        <View />
+      </AuthProvider>
     </I18nextProvider>
   );
 };

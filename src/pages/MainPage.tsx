@@ -1,18 +1,18 @@
 import { useTranslation } from 'react-i18next';
 import appRoutes from '../routes/appRoutes';
 
-const MainPage = () => {
+const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
     <div>
-      <h1>{t('mainHeader')}</h1>
+      <h1>{t('placeholder')}</h1>
       <p>
         {t('placeholder')}
-        <a href={appRoutes.mainPage}>{t('placeholder')}</a>
+        <a href={appRoutes.loginPage}>{t('gotoLogin')}</a>
       </p>
     </div>
   );
 };
 
-export default MainPage;
+export default LoginPage;

@@ -2,6 +2,8 @@ export default {
   translation: {
     placeholder: 'Finally',
     mainHeader: 'Main',
+    gotoMain: 'gotoMain',
+    gotoLogin: 'gotoLogin',
 
     loginForm: {
       username: 'Ваш ник',

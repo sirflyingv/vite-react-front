@@ -17,8 +17,9 @@ import appRoutes from '../routes/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts';
 import { useFormik } from 'formik';
+import axios from 'axios';
 
-const MainPage = () => {
+const LoginPage = () => {
   // const { t } = useTranslation();
   const navigate = useNavigate();
   const auth = useAuth();
@@ -29,10 +30,10 @@ const MainPage = () => {
       password: '',
     },
     onSubmit: async (authData) => {
-      console.log('>>', authData);
       try {
         await auth.logIn(authData);
         navigate(appRoutes.mainPage);
+        console.log('navigate?');
       } catch (error) {
         console.log(error);
       }
@@ -111,8 +112,18 @@ const MainPage = () => {
           </Grid> */}
         </Box>
       </Box>
+      <Button
+        onClick={async () => {
+          const c = document.cookie;
+          console.log(c);
+          const res = await axios.get('/api/resource/23');
+          console.log(res);
+        }}
+      >
+        fvasdz
+      </Button>
     </Container>
   );
 };
 
-export default MainPage;
+export default LoginPage;

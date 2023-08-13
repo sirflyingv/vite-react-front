@@ -12,8 +12,8 @@ const AuthProvider = ({ children }: Props) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const isLoggedIn = () => {
-    const authData = localStorage.getItem('authData');
-    return !!authData;
+    // const authData = localStorage.getItem('authData');
+    return loggedIn;
   };
 
   const logIn = async (authData) => {
@@ -24,14 +24,11 @@ const AuthProvider = ({ children }: Props) => {
           Accept: '*/*',
         },
       });
-      console.log(res);
-      // const { username } = authData;
-      // const { token } = res.data;
-      // localStorage.setItem('authData', JSON.stringify({ token, username }));
-      // setLoggedIn(true);
+      console.log(res); // to store
+      setLoggedIn(true);
     } catch (err) {
       console.log(err);
-      // setLoggedIn(false);
+      setLoggedIn(false);
       throw err; // error traveling magic!!!
     }
   };

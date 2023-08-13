@@ -15,6 +15,17 @@ export default {
       signup: 'Регистрация',
     },
 
+    mainPage: {
+      header: 'Вставьте ссылку на Google Maps',
+      url: 'URL',
+      name: 'Название',
+      add: 'Добавить',
+      error: {
+        url: 'Невалидный  URL',
+        placeName: 'Не должно быть пустым',
+      },
+    },
+
     error: {
       wrongCred: 'Неверные имя пользователя или пароль',
       network: 'Ошибка сети',

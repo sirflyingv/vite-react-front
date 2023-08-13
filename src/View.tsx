@@ -10,10 +10,16 @@ import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 
 import appRoutes from './routes/appRoutes';
+import { useAuth } from './contexts';
 
 const ProtectedRoute = () => {
-  // const auth = useAuth();
-  // return auth.isLoggedIn() ? <Outlet /> : <Navigate to={appRoutes.loginPage} replace />;
+  const auth = useAuth();
+  console.log(auth.isLoggedIn());
+  // return auth.isLoggedIn() ? (
+  //   <Outlet />
+  // ) : (
+  //   <Navigate to={appRoutes.loginPage} replace />
+  // );
   return true ? <Outlet /> : <Navigate to={appRoutes.loginPage} replace />;
 };
 

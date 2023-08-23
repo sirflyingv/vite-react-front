@@ -40,8 +40,8 @@ const gatherPlaceData = async (url: string) => {
   console.log(geocoderData);
 
   return {
-    lat,
-    lon,
+    lat: Number(lat),
+    lon: Number(lon),
     urlData: rest,
     nominatimData: {
       country: geocoderData.reversegeocode.addressparts?.country,

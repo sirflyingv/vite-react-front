@@ -20,7 +20,11 @@ const ProtectedRoute = () => {
   // ) : (
   //   <Navigate to={appRoutes.loginPage} replace />
   // );
-  return true ? <Outlet /> : <Navigate to={appRoutes.loginPage} replace />;
+  return auth.isLoggedIn() ? (
+    <Outlet />
+  ) : (
+    <Navigate to={appRoutes.loginPage} replace />
+  );
 };
 
 const View = () => {

@@ -10,11 +10,15 @@ import { useTranslation } from 'react-i18next';
 // import appRoutes from '../routes/appRoutes';
 
 import { useFormik } from 'formik';
-// import axios from 'axios';
+import axios from 'axios';
 import * as yup from 'yup';
+import wellknown from 'wellknown';
+import { point } from '@turf/helpers';
+//@ts-ignore
+import { toMercator } from '@turf/projection';
 
 import { gatherPlaceData } from '../placeParserAPI';
-// import { placesUrl } from '../routes/ngwRoutes';
+import { placesUrl } from '../routes/ngwRoutes';
 
 const MainPage = () => {
   const { t } = useTranslation();
@@ -32,8 +36,29 @@ const MainPage = () => {
       try {
         const locationData = await gatherPlaceData(data.url);
         console.log({ name: data.placeName, locationData });
+        const { lat, lon } = locationData;
+
+        const geom = point([lon, lat]);
+        const preparedPoint = wellknown.stringify(toMercator(geom));
+
         //
-        // await axios.patch(placesUrl);
+        const resp = await axios.patch(
+          placesUrl,
+          [
+            {
+              fields: { place_name: data.placeName },
+              geom: preparedPoint,
+            },
+          ],
+          {
+            headers: {
+              Accept: '*/*',
+            },
+          }
+        );
+
+        console.log(resp);
+
         //
       } catch (error) {
         console.log(error);
@@ -73,7 +98,7 @@ const MainPage = () => {
             onChange={formik.handleChange}
             value={formik.values.url}
             onBlur={formik.handleBlur}
-            // error={!!formik.errors.url}
+            error={formik.touched.url && !!formik.errors.url}
           />
           <TextField
             margin="normal"

@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './AuthProvider';
 import resources from './i18n/locales';
 
@@ -16,6 +18,7 @@ const App = async () => {
     <I18nextProvider i18n={i18n}>
       <AuthProvider>
         <View />
+        <ToastContainer hideProgressBar={true} />
       </AuthProvider>
     </I18nextProvider>
   );

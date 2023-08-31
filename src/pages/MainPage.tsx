@@ -7,21 +7,16 @@ import {
   Button,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-// import appRoutes from '../routes/appRoutes';
+import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
-import axios from 'axios';
 import * as yup from 'yup';
-import wellknown from 'wellknown';
-import { point } from '@turf/helpers';
-//@ts-ignore
-import { toMercator } from '@turf/projection';
 
-import { gatherPlaceData } from '../placeParserAPI';
-import { placesUrl } from '../routes/ngwRoutes';
+import { useApi } from '../contexts/useApi';
 
 const MainPage = () => {
   const { t } = useTranslation();
+  const { addPlace } = useApi();
 
   const formik = useFormik({
     initialValues: {
@@ -34,32 +29,10 @@ const MainPage = () => {
     }),
     onSubmit: async (data) => {
       try {
-        const locationData = await gatherPlaceData(data.url);
-        console.log({ name: data.placeName, locationData });
-        const { lat, lon } = locationData;
-
-        const geom = point([lon, lat]);
-        const preparedPoint = wellknown.stringify(toMercator(geom));
-
-        //
-        const resp = await axios.patch(
-          placesUrl,
-          [
-            {
-              fields: { place_name: data.placeName },
-              geom: preparedPoint,
-            },
-          ],
-          {
-            headers: {
-              Accept: '*/*',
-            },
-          }
-        );
-
-        console.log(resp);
-
-        //
+        // todo pending handling
+        await addPlace(data);
+        toast('Wow so easy!');
+        formik.resetForm();
       } catch (error) {
         console.log(error);
       }
